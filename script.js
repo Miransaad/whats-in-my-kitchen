@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const spoonacularApiKey = '4c1bade8a0bb49d2b21c745c646d732e'; // Replace with your new Spoonacular API key
+  const spoonacularApiKey = 'aa799f8d72904ebb833d03262c981f6b'; // Replace with your new Spoonacular API key
   const youtubeApiKey = 'AIzaSyD7gQKJHACnaui8lZDHAy7RKU1VcLVmlWk'; // Replace with your YouTube API key
   const nonHalalIngredients = ['pork', 'bacon', 'ham', 'sausage', 'lard', 'wine', 'beer', 'alcohol', 'gelatin', 'rum', 'whiskey', 'vodka', 'brandy'];
   const maxApiCalls = 150; // Spoonacular free plan limit
