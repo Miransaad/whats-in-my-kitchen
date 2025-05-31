@@ -14,7 +14,7 @@ document.getElementById('find-recipes').addEventListener('click', async function
   const spoonacularApiKey = 'fe6c4ccc4d27476ab985b0e87f16868c'; // Replace with your Spoonacular API key
   const youtubeApiKey = 'AIzaSyD7gQKJHACnaui8lZDHAy7RKU1VcLVmlWk'; // Replace with your YouTube API key
   const nonHalalIngredients = ['pork', 'bacon', 'ham', 'sausage', 'lard', 'wine', 'beer', 'alcohol', 'gelatin', 'rum', 'whiskey', 'vodka', 'brandy'];
-  const recipeUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList.join(',')}&number=20&ranking=1&apiKey=${spoonacularApiKey}`;
+  const recipeUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList.join(',')}&number=10&ranking=1&apiKey=${spoonacularApiKey}`;
   console.log('Recipe API URL:', recipeUrl);
 
   document.getElementById('results').innerHTML = '<p>Loading...</p>';
