@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Caveat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Caveat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -27,16 +27,30 @@ header h1 {
 
 .halal-note-header {
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 20px;
   font-size: 0.95em;
   font-weight: 600;
-  color: #fff;
-  background: linear-gradient(45deg, #e67e22, #f39c12);
-  padding: 8px 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  text-transform: uppercase;
+  color: #3c2005;
+  background-color: rgba(255, 171, 145, 0.85);
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ff7043;
+}
+
+.api-quota-header {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #1a3c34;
+  background-color: rgba(200, 230, 201, 0.85);
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #81c784;
 }
 
 main {
@@ -152,7 +166,7 @@ button:hover {
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
   height: 0;
   margin-top: 10px;
 }
@@ -173,6 +187,13 @@ button:hover {
   font-style: italic;
 }
 
+.recipe-description {
+  font-size: 0.85em;
+  color: #444;
+  margin-top: 10px;
+  font-style: italic;
+}
+
 @media (max-width: 600px) {
   header h1 {
     font-size: 2em;
@@ -180,7 +201,14 @@ button:hover {
   .halal-note-header {
     font-size: 0.8em;
     right: 10px;
-    padding: 5px 10px;
+    padding: 6px 12px;
+    top: 5px;
+  }
+  .api-quota-header {
+    font-size: 0.8em;
+    right: 10px;
+    padding: 6px 12px;
+    top: 40px;
   }
   textarea {
     height: 100px;
