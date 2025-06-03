@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const today = new Date().toISOString().split('T')[0];
   let apiCallsUsed = parseInt(localStorage.getItem(`apiCallsUsed_${today}_${userId}`)) || 0;
   const recipeCache = JSON.parse(localStorage.getItem(`recipeCache_${today}_${userId}`)) || {};
+  const loader = document.getElementById('loader');
   const updateQuotaDisplay = () => {
     const remainingCalls = Math.max(0, maxApiCalls - apiCallsUsed);
     const remainingTries = Math.floor(remainingCalls / (callsPerRecipe * recipesPerRequest));
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ingredientsList.length === 0) {
       document.getElementById('results').innerHTML = '<p>Please enter some ingredients.</p>';
       console.log('No ingredients provided');
+      loader.classList.add('hidden');
       return;
     }
 
@@ -53,13 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (recipeCache[cacheKey]) {
       console.log('Serving from cache:', cacheKey);
       displayRecipes(recipeCache[cacheKey]);
+      loader.classList.add('hidden');
       return;
     }
 
     const recipeUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsList.join(',')}&number=${recipesPerRequest}&ranking=1&apiKey=${spoonacularApiKey}`;
     console.log('Recipe API URL:', recipeUrl);
 
-    document.getElementById('results').innerHTML = '<p>Loading...</p>';
+    document.getElementById('results').innerHTML = '';
+    loader.classList.remove('hidden');
 
     try {
       const recipeResponse = await fetch(recipeUrl, { mode: 'cors' });
@@ -84,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (recipes.length === 0) {
         resultsDiv.innerHTML = '<p>No recipes found.</p>';
         console.log('No recipes returned');
+        loader.classList.add('hidden');
         return;
       }
 
@@ -99,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (halalRecipes.length === 0) {
         resultsDiv.innerHTML = '<p>No halal recipes found for these ingredients.</p>';
         console.log('No halal recipes after filtering');
+        loader.classList.add('hidden');
         return;
       }
 
@@ -132,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(recipe.title + ' halal recipe')}&type=video&maxResults=1&key=${youtubeApiKey}`;
           const youtubeResponse = await fetch(youtubeUrl, { mode: 'cors' });
           console.log('YouTube API response status:', youtubeResponse.status);
-          if (!youtubeResponse.ok) throw new Error(`Failed to fetch YouTube video for ${recipe.title}: ${youtubeResponse.status} ${youtubeResponse.statusText}`);
+          if (!youtubeResponse.ok) throw new Error(`Failed to fetch YouTube video for ${recipe.title}: ${youtubeResponse.status} ${recipeResponse.statusText}`);
           const youtubeData = await youtubeResponse.json();
           if (youtubeData.items && youtubeData.items.length > 0) {
             videoId = youtubeData.items[0].id.videoId;
@@ -156,6 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         apiCallsUsed = maxApiCalls;
         updateQuotaDisplay();
       }
+    } finally {
+      loader.classList.add('hidden');
     }
   });
 
